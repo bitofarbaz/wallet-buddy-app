@@ -26,6 +26,7 @@ export const textVariants = (theme: Theme) =>
         "4xl": getFontSizeStyle(32),
       },
       color: {
+        primary: { color: theme.primary },
         foreground: { color: theme.foreground },
         primaryForeground: { color: theme.primaryForeground },
         mutedForeground: { color: theme.mutedForeground },

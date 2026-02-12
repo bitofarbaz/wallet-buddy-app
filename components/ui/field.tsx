@@ -10,7 +10,7 @@ export const Field: FC<ViewProps> = (props) => (
   <View style={{ gap: 12 }} {...props} />
 );
 
-export const FieldError: FC<{ error?: string } & TextProps> = ({
+export const FieldError: FC<{ error: string | undefined } & TextProps> = ({
   error,
   ...props
 }) => {

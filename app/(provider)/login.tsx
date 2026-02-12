@@ -33,7 +33,7 @@ export default function LoginScreen() {
       <Header>
         <HeaderTitle>Wallet Buddy — Lite</HeaderTitle>
       </Header>
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <FieldGroup>
           <Field>
             <Text size="lg" weight="semiBold">
@@ -84,7 +84,7 @@ export default function LoginScreen() {
             onPress={form.handleSubmit(async (formData) => {
               const { email, password } = formData;
               await loginAsync({ email, password });
-              router.push("/");
+              router.navigate("/");
             })}
           >
             <ButtonText>Continue</ButtonText>

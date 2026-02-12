@@ -35,7 +35,7 @@ export default function RegisterScreen() {
         <HeaderBackButton />
         <HeaderTitle>Wallet Buddy — Lite</HeaderTitle>
       </Header>
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="handled">
         <FieldGroup>
           <Field>
             <Text size="lg" weight="semiBold">
@@ -101,7 +101,7 @@ export default function RegisterScreen() {
             onPress={form.handleSubmit(async (formData) => {
               const { name, email, password } = formData;
               await registerAsync({ name, email, password });
-              router.push("/");
+              router.navigate("/");
             })}
           >
             <ButtonText>Create account</ButtonText>

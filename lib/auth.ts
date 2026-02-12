@@ -19,7 +19,6 @@ const login = async (variables: LoginDTO) => {
   });
   if (error) throw error;
 
-  console.debug(data);
   return data;
 };
 

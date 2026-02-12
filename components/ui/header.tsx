@@ -45,3 +45,15 @@ export const HeaderTitle: FC<TextProps> = (props) => {
   // const propsContext = usePropsContext();
   return <Text weight="semiBold" {...props} />;
 };
+
+export const HeaderActions: FC<ViewProps> = (props) => (
+  <View
+    style={{
+      gap: 8,
+      flex: 1,
+      flexDirection: "row",
+      justifyContent: "flex-end",
+    }}
+    {...props}
+  />
+);

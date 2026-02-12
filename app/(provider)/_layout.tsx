@@ -65,7 +65,6 @@ export default function ProviderLayout() {
         subscription: { unsubscribe },
       },
     } = supabase.auth.onAuthStateChange((_, session) => {
-      console.debug(session?.user.id);
       setIsLoading(false);
       setSession(session);
     });
