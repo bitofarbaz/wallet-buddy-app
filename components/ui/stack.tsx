@@ -1,18 +1,18 @@
-import { Stack } from "@/components/ui/stack";
 import { useTheme } from "@/hooks/use-theme";
-import { StatusBar } from "react-native";
+import { Stack as PrimitiveStack } from "expo-router";
+import { ComponentProps, FC } from "react";
 
-export default function RootLayout() {
+export const Stack: FC<ComponentProps<typeof PrimitiveStack>> = (props) => {
   const theme = useTheme();
   return (
-    <Stack
+    <PrimitiveStack
       screenOptions={{
         headerShown: false,
         contentStyle: {
           backgroundColor: theme.background,
-          paddingTop: StatusBar.currentHeight,
         },
       }}
+      {...props}
     />
   );
-}
+};
