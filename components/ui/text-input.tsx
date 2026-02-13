@@ -44,11 +44,11 @@ export const InputGroup: FC<InputGroupProps> = (props) => {
   );
 };
 
-export const TextInput: FC<PrimitiveTextInputProps> = (props) => {
+export const TextInput: FC<PrimitiveTextInputProps> = ({ style, ...props }) => {
   const theme = useTheme();
   return (
     <PrimitiveTextInput
-      style={textVariants(theme)({ style: { flex: 1 } })}
+      style={[textVariants(theme)({ style: { flex: 1, padding: 0 } }), style]}
       placeholderTextColor={theme.mutedForeground}
       {...props}
     />

@@ -31,6 +31,11 @@ const buttonVariants = (theme: Theme) =>
           height: 40,
           borderRadius: 40,
         },
+        "icon-sm": {
+          width: 28,
+          height: 28,
+          borderRadius: 28,
+        },
       },
       variant: {
         default: { backgroundColor: theme.primary },

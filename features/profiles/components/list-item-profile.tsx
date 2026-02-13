@@ -2,13 +2,15 @@ import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { useTheme } from "@/hooks/use-theme";
 import { Profile } from "@/types/api";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Image, View } from "react-native";
 
-export const ListItemProfile: FC<{ profile: Profile; selected?: boolean }> = ({
-  profile,
-  selected,
-}) => {
+export const ListItemProfile: FC<{
+  profile: Profile;
+  selected?: boolean;
+  end?: ReactNode;
+  secondaryText?: string;
+}> = ({ profile, selected, secondaryText, end }) => {
   const theme = useTheme();
   return (
     <View
@@ -44,10 +46,13 @@ export const ListItemProfile: FC<{ profile: Profile; selected?: boolean }> = ({
           />
         )}
       </View>
-      <View>
+      <View style={{ flex: 1 }}>
         <Text weight="semiBold">{profile.name}</Text>
-        <Text color="mutedForeground">#{profile.id.slice(-4)}</Text>
+        <Text color="mutedForeground">
+          {secondaryText ? secondaryText : `#${profile.id.slice(-4)}`}
+        </Text>
       </View>
+      {end}
     </View>
   );
 };

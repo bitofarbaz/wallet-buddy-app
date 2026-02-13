@@ -18,7 +18,7 @@ export const getShareAmount = (
       const remainder = bill.amount_total % totalShares;
       const perShare = (bill.amount_total - remainder) / totalShares;
 
-      return perShare + (payableIdx === 0 ? remainder : 0);
+      return perShare * share.share_value + (payableIdx === 0 ? remainder : 0);
     }
     case "shares": {
       const totalShares =
