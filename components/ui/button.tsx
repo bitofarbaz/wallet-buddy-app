@@ -10,6 +10,8 @@ import { Text, TextProps } from "./text";
 const buttonVariants = (theme: Theme) =>
   sv({
     base: {
+      gap: 8,
+      flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: theme.radius,

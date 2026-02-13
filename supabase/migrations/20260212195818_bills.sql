@@ -28,7 +28,7 @@ CREATE POLICY "Users can see categories"
 	USING ( true );
 
 CREATE TYPE payment_status AS ENUM ('unpaid', 'paid');
-CREATE TYPE split_type AS ENUM ('equally', 'shares', 'exact_amount');
+CREATE TYPE split_method AS ENUM ('equally', 'shares', 'exact_amount');
 
 CREATE TABLE bills (
 	id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -37,7 +37,7 @@ CREATE TABLE bills (
 	payment_status payment_status NOT NULl,
 	invoiced_at timestamp WITH TIME ZONE NOT NULL,
 	amount_total decimal NOT NULL,
-	split_type split_type NOT NULL,
+	split_method split_method NOT NULL,
 	due_at timestamp WITH TIME ZONE, -- if it's unpaid
 	paid_by_id uuid REFERENCES profiles(id), -- if it's paid
 	

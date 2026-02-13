@@ -63,7 +63,11 @@ export const InputValue: FC<
 > = ({ placeholder, children, ...props }) => {
   const isPlaceholder = !children;
   return (
-    <Text {...props} color={isPlaceholder ? "mutedForeground" : "foreground"}>
+    <Text
+      color={isPlaceholder ? "mutedForeground" : "foreground"}
+      style={{ flex: 1 }}
+      {...props}
+    >
       {isPlaceholder ? placeholder : children}
     </Text>
   );
