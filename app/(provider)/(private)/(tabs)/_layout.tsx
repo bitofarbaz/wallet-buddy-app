@@ -1,11 +1,12 @@
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { useTheme } from "@/hooks/use-theme";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
 
 export default function TabsLayout() {
   const theme = useTheme();
+  const router = useRouter();
   return (
     <Tabs
       screenOptions={{
@@ -52,6 +53,7 @@ export default function TabsLayout() {
         options={{
           tabBarButton: () => (
             <TouchableOpacity
+              onPress={() => router.navigate("/bills/new")}
               style={{
                 width: 48,
                 height: 48,

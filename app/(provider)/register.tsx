@@ -2,6 +2,7 @@ import { Button, ButtonText } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup } from "@/components/ui/field";
 import { Header, HeaderBackButton, HeaderTitle } from "@/components/ui/header";
 import { KeyboardAwareView } from "@/components/ui/keyboard-aware-view";
+import { Label } from "@/components/ui/label";
 import { Text } from "@/components/ui/text";
 import { InputGroup, TextInput } from "@/components/ui/text-input";
 import { useRegisterMutation } from "@/lib/auth";
@@ -50,7 +51,7 @@ export default function RegisterScreen() {
             name="name"
             render={({ field: { value, onChange }, fieldState: { error } }) => (
               <Field>
-                <Text>Name</Text>
+                <Label>Name</Label>
                 <InputGroup>
                   <TextInput
                     placeholder="Arbaz Ajaz"
@@ -67,7 +68,7 @@ export default function RegisterScreen() {
             name="email"
             render={({ field: { value, onChange }, fieldState: { error } }) => (
               <Field>
-                <Text>Email</Text>
+                <Label>Email</Label>
                 <InputGroup>
                   <TextInput
                     placeholder="john.doe@example.com"
@@ -84,7 +85,7 @@ export default function RegisterScreen() {
             name="password"
             render={({ field: { value, onChange }, fieldState: { error } }) => (
               <Field>
-                <Text>Password</Text>
+                <Label>Password</Label>
                 <InputGroup>
                   <TextInput
                     secureTextEntry

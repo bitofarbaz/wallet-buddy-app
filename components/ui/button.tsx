@@ -20,6 +20,10 @@ const buttonVariants = (theme: Theme) =>
         md: {
           height: 40,
         },
+        sm: {
+          height: 28,
+          paddingHorizontal: 12,
+        },
         icon: {
           width: 40,
           height: 40,

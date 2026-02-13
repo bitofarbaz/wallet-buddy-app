@@ -102,8 +102,12 @@ export default function ContactsScreen() {
           enablePanDownToClose
           keyboardBlurBehavior="restore"
           keyboardBehavior="interactive"
-          onClose={() => Keyboard.dismiss()}
+          onClose={() => {
+            Keyboard.dismiss();
+            form.reset();
+          }}
           containerStyle={{ marginHorizontal: 16 }}
+          handleIndicatorStyle={{ backgroundColor: theme.mutedForeground }}
           handleStyle={{
             backgroundColor: theme.card,
             borderTopLeftRadius: theme.radius,
@@ -146,7 +150,7 @@ export default function ContactsScreen() {
                     <InputGroup>
                       <BottomSheetTextInput
                         placeholderTextColor={theme.mutedForeground}
-                        style={textVariants(theme)()}
+                        style={textVariants(theme)({ style: { flex: 1 } })}
                         placeholder="John Doe"
                         value={value}
                         onChangeText={onChange}

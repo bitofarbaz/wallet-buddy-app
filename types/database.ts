@@ -34,6 +34,124 @@ export type Database = {
   }
   public: {
     Tables: {
+      bill_shares: {
+        Row: {
+          bill_id: string
+          share_value: number
+          user_id: string
+        }
+        Insert: {
+          bill_id: string
+          share_value: number
+          user_id: string
+        }
+        Update: {
+          bill_id?: string
+          share_value?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bill_shares_bill_id_fkey"
+            columns: ["bill_id"]
+            isOneToOne: false
+            referencedRelation: "bills"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bill_shares_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bills: {
+        Row: {
+          amount_total: number
+          category_id: string
+          created_at: string | null
+          created_by_id: string
+          due_at: string | null
+          id: string
+          invoiced_at: string
+          paid_by_id: string | null
+          payment_status: Database["public"]["Enums"]["payment_status"]
+          split_type: Database["public"]["Enums"]["split_type"]
+          title: string
+        }
+        Insert: {
+          amount_total: number
+          category_id: string
+          created_at?: string | null
+          created_by_id: string
+          due_at?: string | null
+          id?: string
+          invoiced_at: string
+          paid_by_id?: string | null
+          payment_status: Database["public"]["Enums"]["payment_status"]
+          split_type: Database["public"]["Enums"]["split_type"]
+          title: string
+        }
+        Update: {
+          amount_total?: number
+          category_id?: string
+          created_at?: string | null
+          created_by_id?: string
+          due_at?: string | null
+          id?: string
+          invoiced_at?: string
+          paid_by_id?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"]
+          split_type?: Database["public"]["Enums"]["split_type"]
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bills_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bills_created_by_id_fkey"
+            columns: ["created_by_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bills_paid_by_id_fkey"
+            columns: ["paid_by_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      categories: {
+        Row: {
+          created_at: string | null
+          icon: string
+          id: string
+          label: string
+        }
+        Insert: {
+          created_at?: string | null
+          icon: string
+          id?: string
+          label: string
+        }
+        Update: {
+          created_at?: string | null
+          icon?: string
+          id?: string
+          label?: string
+        }
+        Relationships: []
+      }
       contacts: {
         Row: {
           contact_id: string
@@ -74,7 +192,6 @@ export type Database = {
           id: string
           name: string
           parent_profile_id: string | null
-          updated_at: string | null
         }
         Insert: {
           created_at?: string | null
@@ -82,7 +199,6 @@ export type Database = {
           id?: string
           name: string
           parent_profile_id?: string | null
-          updated_at?: string | null
         }
         Update: {
           created_at?: string | null
@@ -90,7 +206,6 @@ export type Database = {
           id?: string
           name?: string
           parent_profile_id?: string | null
-          updated_at?: string | null
         }
         Relationships: [
           {
@@ -110,7 +225,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      payment_status: "unpaid" | "paid"
+      split_type: "equally" | "shares" | "exact_amount"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -240,7 +356,10 @@ export const Constants = {
     Enums: {},
   },
   public: {
-    Enums: {},
+    Enums: {
+      payment_status: ["unpaid", "paid"],
+      split_type: ["equally", "shares", "exact_amount"],
+    },
   },
 } as const
 

@@ -17,14 +17,19 @@ import { Session } from "@supabase/supabase-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as SplashScreen from "expo-splash-screen";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
-import { Text } from "react-native";
 
 const queryClient = new QueryClient();
 
 const ProfileProvider: FC<PropsWithChildren> = ({ children }) => {
   const session = useSession();
   const { data, isLoading } = useProfileQuery(session.user.id);
-  if (isLoading) return <Text>loading...</Text>;
+  if (isLoading)
+    return (
+      <Loader>
+        <LoaderIcon />
+        <LoaderText>Fetching profile...</LoaderText>
+      </Loader>
+    );
   return (
     <ProfileContext.Provider value={data || null}>
       {children}

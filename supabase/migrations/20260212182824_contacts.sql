@@ -11,7 +11,7 @@ CREATE POLICY "Users can create contacts for people who're not on the platform"
 CREATE TABLE IF NOT EXISTS contacts (
 	user_id uuid REFERENCES profiles,
 	contact_id uuid REFERENCES profiles,
-	created_at timestamp default now(),
+	created_at timestamp WITH TIME ZONE default now(),
 
 	PRIMARY KEY (user_id, contact_id)
 );

@@ -2,8 +2,7 @@ CREATE TABLE IF NOT EXISTS profiles (
 	id uuid REFERENCES auth.users PRIMARY KEY,
 	name varchar(255) NOT NULL,
 	email varchar(255),
-	created_at timestamp default now(),
-	updated_at timestamp
+	created_at timestamp WITH TIME ZONE default now()
 );
 
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;

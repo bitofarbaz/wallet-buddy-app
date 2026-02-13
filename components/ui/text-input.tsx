@@ -8,11 +8,14 @@ import {
   View,
 } from "react-native";
 import { sv, VariantProps } from "style-variants";
-import { textVariants } from "./text";
+import { Icon, IconProps } from "./icon";
+import { Text, TextProps, textVariants } from "./text";
 
 const inputGroupVariants = (theme: Theme) =>
   sv({
     base: {
+      alignItems: "center",
+      flexDirection: "row",
       borderRadius: theme.radius,
       backgroundColor: theme.secondary,
     },
@@ -45,9 +48,27 @@ export const TextInput: FC<PrimitiveTextInputProps> = (props) => {
   const theme = useTheme();
   return (
     <PrimitiveTextInput
-      style={textVariants(theme)()}
+      style={textVariants(theme)({ style: { flex: 1 } })}
       placeholderTextColor={theme.mutedForeground}
       {...props}
     />
   );
 };
+
+export const InputValue: FC<
+  Omit<TextProps, "children"> & {
+    placeholder: string | undefined;
+    children: string | boolean | undefined;
+  }
+> = ({ placeholder, children, ...props }) => {
+  const isPlaceholder = !children;
+  return (
+    <Text {...props} color={isPlaceholder ? "mutedForeground" : "foreground"}>
+      {isPlaceholder ? placeholder : children}
+    </Text>
+  );
+};
+
+export const InputIcon: FC<IconProps> = (props) => (
+  <Icon size={18} style={{ marginHorizontal: 6 }} {...props} />
+);
