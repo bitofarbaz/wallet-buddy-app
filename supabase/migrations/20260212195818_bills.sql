@@ -40,10 +40,14 @@ CREATE TABLE bills (
 	split_method split_method NOT NULL,
 	due_at timestamp WITH TIME ZONE, -- if it's unpaid
 	paid_by_id uuid REFERENCES profiles(id), -- if it's paid
+	paid_at timestamp WITH TIME ZONE, -- if it's paid
+	participant_ids uuid[] DEFAULT '{}',
 	
 	created_at timestamp WITH TIME ZONE DEFAULT NOW(),
 	created_by_id uuid REFERENCES profiles(id) NOT NULL
 );
+
+CREATE INDEX idx_bills_participants ON bills USING GIN (participant_ids);
 
 CREATE TABLE bill_shares (
 	bill_id uuid REFERENCES bills(id),
@@ -67,23 +71,27 @@ CREATE POLICY "Users can view bills they're a part of"
 	TO authenticated
 	USING ( 
 		auth.uid() = bills.created_by_id OR 
-		EXISTS ( 
-			SELECT 1 FROM bill_shares WHERE bill_shares.bill_id = bills.id AND bill_shares.user_id = auth.uid() 
-		) 
+		participant_ids @> ARRAY[auth.uid()]
 	);
 
 CREATE POLICY "Users can create shares for bills they're a part of"
 	ON bill_shares FOR INSERT
 	TO authenticated
 	WITH CHECK (
-		EXISTS ( SELECT 1 FROM bills WHERE bills.created_by_id = auth.uid() ) OR
-		EXISTS ( SELECT 1 FROM bill_shares AS bs WHERE bs.bill_id = bill_shares.bill_id AND bs.user_id = auth.uid() )
+		EXISTS ( 
+			SELECT 1 FROM bills 
+				WHERE bills.id = bill_shares.bill_id AND 
+				bills.participant_ids @> ARRAY[auth.uid()]
+		) 
 	);
 
 CREATE POLICY "Users can view shares for bills they're a part of"
 	ON bill_shares FOR SELECT
 	TO authenticated
 	USING (
-		EXISTS ( SELECT 1 FROM bills WHERE bills.created_by_id = auth.uid() ) OR
-		EXISTS ( SELECT 1 FROM bill_shares AS bs WHERE bs.bill_id = bill_shares.bill_id AND bs.user_id = auth.uid() )
+		EXISTS ( 
+			SELECT 1 FROM bills 
+				WHERE bills.id = bill_shares.bill_id AND 
+				bills.participant_ids @> ARRAY[auth.uid()]
+		) 
 	);

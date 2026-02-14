@@ -76,9 +76,11 @@ export type Database = {
           due_at: string | null
           id: string
           invoiced_at: string
+          paid_at: string | null
           paid_by_id: string | null
+          participant_ids: string[] | null
           payment_status: Database["public"]["Enums"]["payment_status"]
-          split_type: Database["public"]["Enums"]["split_type"]
+          split_method: Database["public"]["Enums"]["split_method"]
           title: string
         }
         Insert: {
@@ -89,9 +91,11 @@ export type Database = {
           due_at?: string | null
           id?: string
           invoiced_at: string
+          paid_at?: string | null
           paid_by_id?: string | null
+          participant_ids?: string[] | null
           payment_status: Database["public"]["Enums"]["payment_status"]
-          split_type: Database["public"]["Enums"]["split_type"]
+          split_method: Database["public"]["Enums"]["split_method"]
           title: string
         }
         Update: {
@@ -102,9 +106,11 @@ export type Database = {
           due_at?: string | null
           id?: string
           invoiced_at?: string
+          paid_at?: string | null
           paid_by_id?: string | null
+          participant_ids?: string[] | null
           payment_status?: Database["public"]["Enums"]["payment_status"]
-          split_type?: Database["public"]["Enums"]["split_type"]
+          split_method?: Database["public"]["Enums"]["split_method"]
           title?: string
         }
         Relationships: [
@@ -226,7 +232,7 @@ export type Database = {
     }
     Enums: {
       payment_status: "unpaid" | "paid"
-      split_type: "equally" | "shares" | "exact_amount"
+      split_method: "equally" | "shares" | "exact_amount"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -358,7 +364,7 @@ export const Constants = {
   public: {
     Enums: {
       payment_status: ["unpaid", "paid"],
-      split_type: ["equally", "shares", "exact_amount"],
+      split_method: ["equally", "shares", "exact_amount"],
     },
   },
 } as const

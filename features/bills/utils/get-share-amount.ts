@@ -1,7 +1,7 @@
 import { Bill, BillShare } from "@/types/api";
 
 export const getShareAmount = (
-  bill: Pick<Bill, "split_type" | "amount_total"> & {
+  bill: Pick<Bill, "split_method" | "amount_total"> & {
     bill_shares: BillShare[];
   },
   user_id: string,
@@ -11,7 +11,7 @@ export const getShareAmount = (
   const payableIdx = bill.bill_shares
     .filter((item) => item.share_value)
     .findIndex((item) => item.user_id === user_id);
-  switch (bill.split_type) {
+  switch (bill.split_method) {
     case "equally": {
       const totalShares =
         bill.bill_shares.reduce((acc, cv) => acc + cv.share_value, 0) || 1;
