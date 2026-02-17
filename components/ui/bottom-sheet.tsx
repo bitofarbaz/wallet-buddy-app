@@ -66,7 +66,10 @@ export const DetachedBottomSheet: FC<BottomSheetProps> = (props) => (
 );
 
 export const BottomSheetHeader: FC<ViewProps> = (props) => (
-  <View style={{ gap: 8, paddingHorizontal: 16 }} {...props} />
+  <View
+    style={{ gap: 8, paddingHorizontal: 16, marginBottom: 24 }}
+    {...props}
+  />
 );
 
 export const BottomSheetTitle: FC<TextProps> = (props) => (

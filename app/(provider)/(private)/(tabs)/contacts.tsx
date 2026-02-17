@@ -106,7 +106,7 @@ export default function ContactsScreen() {
             form.reset();
           }}
         >
-          <BottomSheetView>
+          <BottomSheetView style={{ paddingBlock: 16 }}>
             <FieldGroup>
               <View style={{ gap: 8 }}>
                 <Text size="lg" weight="semiBold">

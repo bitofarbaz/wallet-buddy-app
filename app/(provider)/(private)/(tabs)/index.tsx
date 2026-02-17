@@ -11,6 +11,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button, ButtonText } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Field, FieldGroup } from "@/components/ui/field";
 import {
   ScreenDescription,
@@ -23,10 +24,9 @@ import { useBillsQuery } from "@/features/bills/api/get-bills";
 import { ListItemBill } from "@/features/bills/components/list-item-bill";
 import { useTransfersQuery } from "@/features/transfers/api/get-transfers";
 import { ListItemTransfer } from "@/features/transfers/components/list-item-transfer";
-import { useTheme } from "@/hooks/use-theme";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import { FC, PropsWithChildren, useRef } from "react";
-import { FlatList, TouchableOpacity, View } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 
 const DeleteBill: FC<{ id: string } & PropsWithChildren> = ({
   id,
@@ -44,7 +44,7 @@ const DeleteBill: FC<{ id: string } & PropsWithChildren> = ({
         {children}
       </TouchableOpacity>
       <DetachedBottomSheet ref={ref}>
-        <BottomSheetView>
+        <BottomSheetView style={{ paddingBlock: 16 }}>
           <BottomSheetHeader>
             <BottomSheetTitle>Delete Bill #{id.slice(-4)}</BottomSheetTitle>
             <BottomSheetDescription>
@@ -74,7 +74,6 @@ const DeleteBill: FC<{ id: string } & PropsWithChildren> = ({
 };
 
 export default function IndexScreen() {
-  const theme = useTheme();
   const billsQuery = useBillsQuery();
   const transfersQuery = useTransfersQuery();
   const transactions = [
@@ -114,13 +113,8 @@ export default function IndexScreen() {
         }
         ListHeaderComponentStyle={{ marginBottom: 24 }}
         ListHeaderComponent={() => (
-          <View
+          <Card
             style={{
-              paddingBlock: 16,
-              backgroundColor: theme.card,
-              borderRadius: theme.radius,
-              borderColor: theme.accent,
-              borderWidth: 1,
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -131,7 +125,7 @@ export default function IndexScreen() {
             <Text size="xl" weight="semiBold">
               Rs 12,345.67
             </Text>
-          </View>
+          </Card>
         )}
       />
     </>
