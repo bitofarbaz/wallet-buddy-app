@@ -1,4 +1,5 @@
 import { Text } from "@/components/ui/text";
+import { useFormatCurrency } from "@/hooks/use-format-currency";
 import { useTheme } from "@/hooks/use-theme";
 import { useSession } from "@/stores/session.context";
 import { Bill, BillShare, Category } from "@/types/api";
@@ -12,6 +13,7 @@ export const ListItemBill: FC<{
   secondaryText?: string;
 }> = ({ bill, secondaryText, end }) => {
   const session = useSession();
+  const format = useFormatCurrency();
   const theme = useTheme();
   return (
     <View
@@ -42,7 +44,9 @@ export const ListItemBill: FC<{
       </View>
       <View style={{ justifyContent: "flex-end", alignItems: "flex-end" }}>
         <Text color="mutedForeground">your share</Text>
-        <Text weight="semiBold">{getShareAmount(bill, session.user.id)}</Text>
+        <Text weight="semiBold">
+          {format(getShareAmount(bill, session.user.id))}
+        </Text>
       </View>
     </View>
   );

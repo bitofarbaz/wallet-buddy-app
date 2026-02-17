@@ -1,5 +1,6 @@
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
+import { useFormatCurrency } from "@/hooks/use-format-currency";
 import { useTheme } from "@/hooks/use-theme";
 import { useSession } from "@/stores/session.context";
 import { Profile, Transfer } from "@/types/api";
@@ -13,6 +14,7 @@ export const ListItemTransfer: FC<{
 }> = ({ transfer, secondaryText }) => {
   const theme = useTheme();
   const session = useSession();
+  const format = useFormatCurrency();
   const type: TransferType =
     transfer.from_user_id === session.user.id ? "sent" : "received";
   const contact = type === "sent" ? transfer.to_user : transfer.from_user;
@@ -45,7 +47,7 @@ export const ListItemTransfer: FC<{
       </View>
       <View style={{ justifyContent: "flex-end", alignItems: "flex-end" }}>
         <Text color="mutedForeground">{type}</Text>
-        <Text weight="semiBold">{transfer.amount_total}</Text>
+        <Text weight="semiBold">{format(transfer.amount_total)}</Text>
       </View>
     </View>
   );
