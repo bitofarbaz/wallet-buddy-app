@@ -223,6 +223,48 @@ export type Database = {
           },
         ]
       }
+      transfers: {
+        Row: {
+          amount_total: number
+          created_at: string | null
+          from_user_id: string
+          id: string
+          to_user_id: string
+          transferred_at: string
+        }
+        Insert: {
+          amount_total: number
+          created_at?: string | null
+          from_user_id: string
+          id?: string
+          to_user_id: string
+          transferred_at: string
+        }
+        Update: {
+          amount_total?: number
+          created_at?: string | null
+          from_user_id?: string
+          id?: string
+          to_user_id?: string
+          transferred_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transfers_from_user_id_fkey"
+            columns: ["from_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transfers_to_user_id_fkey"
+            columns: ["to_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

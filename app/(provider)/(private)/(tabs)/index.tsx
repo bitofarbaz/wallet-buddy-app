@@ -21,6 +21,8 @@ import { Text } from "@/components/ui/text";
 import { useDeleteBillMutation } from "@/features/bills/api/delete-bill";
 import { useBillsQuery } from "@/features/bills/api/get-bills";
 import { ListItemBill } from "@/features/bills/components/list-item-bill";
+import { useTransfersQuery } from "@/features/transfers/api/get-transfers";
+import { ListItemTransfer } from "@/features/transfers/components/list-item-transfer";
 import { useTheme } from "@/hooks/use-theme";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import { FC, PropsWithChildren, useRef } from "react";
@@ -74,6 +76,17 @@ const DeleteBill: FC<{ id: string } & PropsWithChildren> = ({
 export default function IndexScreen() {
   const theme = useTheme();
   const billsQuery = useBillsQuery();
+  const transfersQuery = useTransfersQuery();
+  const transactions = [
+    ...(billsQuery.data || []).map((bill) => ({
+      ...bill,
+      __typename: "Bill" as const,
+    })),
+    ...(transfersQuery.data || []).map((transfer) => ({
+      ...transfer,
+      __typename: "Transfer" as const,
+    })),
+  ];
   return (
     <>
       <ScreenHeader>
@@ -89,12 +102,16 @@ export default function IndexScreen() {
       </ScreenHeader>
       <FlatList
         contentContainerStyle={{ paddingHorizontal: 16 }}
-        data={billsQuery.data || []}
-        renderItem={({ item }) => (
-          <DeleteBill id={item.id}>
-            <ListItemBill bill={item} />
-          </DeleteBill>
-        )}
+        data={transactions}
+        renderItem={({ item }) =>
+          item.__typename === "Bill" ? (
+            <DeleteBill id={item.id}>
+              <ListItemBill bill={item} />
+            </DeleteBill>
+          ) : (
+            <ListItemTransfer transfer={item} />
+          )
+        }
         ListHeaderComponentStyle={{ marginBottom: 24 }}
         ListHeaderComponent={() => (
           <View

@@ -6,13 +6,24 @@ import {
   BottomSheetRef,
   BottomSheetTitle,
 } from "@/components/ui/bottom-sheet";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbScreen,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup } from "@/components/ui/field";
-import { Header, HeaderBackButton, HeaderTitle } from "@/components/ui/header";
+import { Header, HeaderBackButton } from "@/components/ui/header";
 import { KeyboardAwareView } from "@/components/ui/keyboard-aware-view";
 import { Label } from "@/components/ui/label";
 import { Loader, LoaderIcon, LoaderText } from "@/components/ui/loader";
 import { RadioGroup, RadioItem, RadioLabel } from "@/components/ui/radio";
+import {
+  ScreenDescription,
+  ScreenHeader,
+  ScreenTitle,
+} from "@/components/ui/screen";
 import { Text } from "@/components/ui/text";
 import {
   InputGroup,
@@ -429,9 +440,23 @@ const PaymentInformation: FC = () => {
     <>
       <Header>
         <HeaderBackButton onPress={prev} />
-        <HeaderTitle>New Bill — Payment Information</HeaderTitle>
       </Header>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
+        <ScreenHeader>
+          <Breadcrumb>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>Bills</BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>New</BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbScreen>Payment information</BreadcrumbScreen>
+          </Breadcrumb>
+          <ScreenTitle>Payment Information</ScreenTitle>
+          <ScreenDescription>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem,
+            dolorem!
+          </ScreenDescription>
+        </ScreenHeader>
         <FieldGroup style={{ flex: 1 }}>
           <Controller
             control={form.control}
@@ -525,8 +550,22 @@ const SplitBill: FC = () => {
     <>
       <Header>
         <HeaderBackButton onPress={prev} />
-        <HeaderTitle>New Bill — Split Bill</HeaderTitle>
       </Header>
+      <ScreenHeader>
+        <Breadcrumb>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>Bills</BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>New</BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbScreen>Split bill</BreadcrumbScreen>
+        </Breadcrumb>
+        <ScreenTitle>Split Bill</ScreenTitle>
+        <ScreenDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem,
+          dolorem!
+        </ScreenDescription>
+      </ScreenHeader>
       <FieldGroup style={{ flex: 1 }}>
         <Field style={{ flex: 1 }}>
           <SelectParticipants />
@@ -553,13 +592,27 @@ const BasicInformation: FC = () => {
     <>
       <Header>
         <HeaderBackButton />
-        <HeaderTitle>New Bill — Basic Information</HeaderTitle>
       </Header>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ flexGrow: 1 }}
         keyboardShouldPersistTaps="handled"
       >
+        <ScreenHeader>
+          <Breadcrumb>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>Bills</BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>New</BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbScreen>Basic information</BreadcrumbScreen>
+          </Breadcrumb>
+          <ScreenTitle>Basic Information</ScreenTitle>
+          <ScreenDescription>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem,
+            dolorem!
+          </ScreenDescription>
+        </ScreenHeader>
         <FieldGroup style={{ flex: 1 }}>
           <SelectCategory />
           <Controller

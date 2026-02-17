@@ -13,6 +13,10 @@ export const BreadcrumbSeparator: FC = () => (
   </Text>
 );
 
+export const BreadcrumbItem: FC<TextProps> = (props) => (
+  <Text size="sm" color="mutedForeground" {...props} />
+);
+
 export const BreadcrumbScreen: FC<TextProps> = (props) => (
   <Text size="sm" {...props} />
 );

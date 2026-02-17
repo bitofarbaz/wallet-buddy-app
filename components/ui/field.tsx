@@ -3,7 +3,7 @@ import { View, ViewProps } from "react-native";
 import { Text, TextProps } from "./text";
 
 export const FieldGroup: FC<ViewProps> = ({ style, ...props }) => (
-  <View style={[{ gap: 24, padding: 16 }, style]} {...props} />
+  <View style={[{ gap: 24, paddingHorizontal: 16 }, style]} {...props} />
 );
 
 export const Field: FC<ViewProps> = ({ style, ...props }) => (

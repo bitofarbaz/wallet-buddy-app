@@ -106,6 +106,6 @@ export const ButtonText: FC<TextProps> = (props) => {
 };
 
 export const ButtonIcon: FC<IconProps> = (props) => {
-  // const propsContext = usePropsContext();
-  return <Icon {...props} />;
+  const propsContext = usePropsContext();
+  return <Icon size={propsContext.size === "sm" ? 16 : 24} {...props} />;
 };

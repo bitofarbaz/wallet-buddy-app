@@ -65,7 +65,7 @@ export default function TabsLayout() {
                 justifyContent: "center",
               }}
             >
-              <Icon name="plus" size={32} />
+              <Icon name="plus" size={32} color={theme.primaryForeground} />
             </TouchableOpacity>
           ),
         }}

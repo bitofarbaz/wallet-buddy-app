@@ -29,9 +29,10 @@ import { useTheme } from "@/hooks/use-theme";
 import { BottomSheetTextInput, BottomSheetView } from "@gorhom/bottom-sheet";
 import { Portal } from "@gorhom/portal";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "expo-router";
 import { useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { FlatList, Keyboard, View } from "react-native";
+import { FlatList, Keyboard, TouchableOpacity, View } from "react-native";
 import { z } from "zod";
 
 const ContactFormSchema = z.object({
@@ -42,6 +43,7 @@ type CreateContactFormValues = z.infer<typeof ContactFormSchema>;
 export default function ContactsScreen() {
   const ref = useRef<BottomSheetRef>(null!);
   const theme = useTheme();
+  const router = useRouter();
   const contactsQuery = useContactsQuery();
   const { mutateAsync: createContactAsync, isPending } =
     useCreateContactMutation();
@@ -75,8 +77,19 @@ export default function ContactsScreen() {
       </ScreenHeader>
       <FlatList
         data={contactsQuery.data || []}
-        contentContainerStyle={{ padding: 16 }}
-        renderItem={({ item }) => <ListItemProfile profile={item} />}
+        contentContainerStyle={{ paddingHorizontal: 16 }}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              router.navigate({
+                pathname: "/(provider)/(private)/contacts/[id]",
+                params: { id: item.id },
+              })
+            }
+          >
+            <ListItemProfile profile={item} />
+          </TouchableOpacity>
+        )}
         ListFooterComponentStyle={{ marginTop: 24 }}
         ListFooterComponent={() => (
           <Button variant="secondary" onPress={() => ref.current.expand()}>
