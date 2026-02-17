@@ -1,8 +1,18 @@
+import {
+  Breadcrumb,
+  BreadcrumbScreen,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup } from "@/components/ui/field";
-import { Header, HeaderBackButton, HeaderTitle } from "@/components/ui/header";
+import { Header, HeaderBackButton } from "@/components/ui/header";
 import { KeyboardAwareView } from "@/components/ui/keyboard-aware-view";
 import { Label } from "@/components/ui/label";
+import {
+  ScreenDescription,
+  ScreenHeader,
+  ScreenTitle,
+} from "@/components/ui/screen";
 import { Text } from "@/components/ui/text";
 import { InputGroup, TextInput } from "@/components/ui/text-input";
 import { useRegisterMutation } from "@/lib/auth";
@@ -34,18 +44,19 @@ export default function RegisterScreen() {
     <View style={{ flex: 1 }}>
       <Header>
         <HeaderBackButton />
-        <HeaderTitle>Wallet Buddy — Lite</HeaderTitle>
       </Header>
       <ScrollView keyboardShouldPersistTaps="handled">
+        <ScreenHeader>
+          <Breadcrumb>
+            <BreadcrumbSeparator />
+            <BreadcrumbScreen>Register</BreadcrumbScreen>
+          </Breadcrumb>
+          <ScreenTitle>Create an account! 🥳</ScreenTitle>
+          <ScreenDescription>
+            Please provide the following details to start using Wallet Buddy!
+          </ScreenDescription>
+        </ScreenHeader>
         <FieldGroup>
-          <Field>
-            <Text size="lg" weight="semiBold">
-              🥳 Create an account!
-            </Text>
-            <Text color="mutedForeground">
-              Please provide the following details to start using Wallet Buddy!
-            </Text>
-          </Field>
           <Controller
             control={form.control}
             name="name"

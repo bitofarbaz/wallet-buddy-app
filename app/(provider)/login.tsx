@@ -1,8 +1,18 @@
+import {
+  Breadcrumb,
+  BreadcrumbScreen,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup } from "@/components/ui/field";
-import { Header, HeaderTitle } from "@/components/ui/header";
+import { Header } from "@/components/ui/header";
 import { KeyboardAwareView } from "@/components/ui/keyboard-aware-view";
 import { Label } from "@/components/ui/label";
+import {
+  ScreenDescription,
+  ScreenHeader,
+  ScreenTitle,
+} from "@/components/ui/screen";
 import { Text } from "@/components/ui/text";
 import { InputGroup, TextInput } from "@/components/ui/text-input";
 import { useLoginMutation } from "@/lib/auth";
@@ -31,20 +41,20 @@ export default function LoginScreen() {
         flex: 1,
       }}
     >
-      <Header>
-        <HeaderTitle>Wallet Buddy — Lite</HeaderTitle>
-      </Header>
+      <Header>{/* <HeaderTitle>Login</HeaderTitle> */}</Header>
       <ScrollView keyboardShouldPersistTaps="handled">
+        <ScreenHeader>
+          <Breadcrumb>
+            <BreadcrumbSeparator />
+            <BreadcrumbScreen>Login</BreadcrumbScreen>
+          </Breadcrumb>
+          <ScreenTitle>Welcome back! 👋</ScreenTitle>
+          <ScreenDescription>
+            Please enter your credentials to login and continue using Wallet
+            Buddy!
+          </ScreenDescription>
+        </ScreenHeader>
         <FieldGroup>
-          <Field>
-            <Text size="lg" weight="semiBold">
-              👋 Welcome back!
-            </Text>
-            <Text color="mutedForeground">
-              Please enter your credentials to login and continue using Wallet
-              Buddy!
-            </Text>
-          </Field>
           <Controller
             control={form.control}
             name="email"

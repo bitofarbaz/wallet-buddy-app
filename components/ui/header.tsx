@@ -15,8 +15,6 @@ const headerVariants = (theme: Theme) =>
       paddingHorizontal: 16,
       alignItems: "center",
       flexDirection: "row",
-      borderBottomWidth: 1,
-      borderBottomColor: theme.secondary,
     },
     variants: {},
   });

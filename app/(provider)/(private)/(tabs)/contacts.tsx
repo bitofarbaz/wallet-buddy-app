@@ -2,15 +2,24 @@ import {
   BottomSheetRef,
   DetachedBottomSheet,
 } from "@/components/ui/bottom-sheet";
+import {
+  Breadcrumb,
+  BreadcrumbScreen,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup } from "@/components/ui/field";
 import {
   Header,
   HeaderActions,
   HeaderBackButton,
-  HeaderTitle,
 } from "@/components/ui/header";
 import { Label } from "@/components/ui/label";
+import {
+  ScreenDescription,
+  ScreenHeader,
+  ScreenTitle,
+} from "@/components/ui/screen";
 import { Text, textVariants } from "@/components/ui/text";
 import { InputGroup } from "@/components/ui/text-input";
 import { useCreateContactMutation } from "@/features/contacts/api/create-contact";
@@ -43,7 +52,7 @@ export default function ContactsScreen() {
     <>
       <Header>
         <HeaderBackButton />
-        <HeaderTitle>Contacts</HeaderTitle>
+        {/* <HeaderTitle>Contacts</HeaderTitle> */}
         <HeaderActions>
           <Button
             size="icon"
@@ -54,6 +63,16 @@ export default function ContactsScreen() {
           </Button>
         </HeaderActions>
       </Header>
+      <ScreenHeader>
+        <Breadcrumb>
+          <BreadcrumbSeparator />
+          <BreadcrumbScreen>Contacts</BreadcrumbScreen>
+        </Breadcrumb>
+        <ScreenTitle>Contacts</ScreenTitle>
+        <ScreenDescription>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, quam.
+        </ScreenDescription>
+      </ScreenHeader>
       <FlatList
         data={contactsQuery.data || []}
         contentContainerStyle={{ padding: 16 }}
