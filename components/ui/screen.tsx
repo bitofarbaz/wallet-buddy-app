@@ -4,7 +4,7 @@ import { Text, TextProps } from "./text";
 
 export const ScreenHeader: FC<ViewProps> = ({ style, ...props }) => (
   <View
-    style={[{ marginTop: 16, gap: 8, paddingHorizontal: 16 }, style]}
+    style={[{ marginBlock: 24, gap: 8, paddingHorizontal: 16 }, style]}
     {...props}
   />
 );

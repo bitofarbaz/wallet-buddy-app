@@ -77,6 +77,13 @@ export default function ContactsScreen() {
         data={contactsQuery.data || []}
         contentContainerStyle={{ padding: 16 }}
         renderItem={({ item }) => <ListItemProfile profile={item} />}
+        ListFooterComponentStyle={{ marginTop: 24 }}
+        ListFooterComponent={() => (
+          <Button variant="secondary" onPress={() => ref.current.expand()}>
+            <ButtonIcon name="account-plus" />
+            <ButtonText>Create contact</ButtonText>
+          </Button>
+        )}
       />
       <Portal>
         <DetachedBottomSheet

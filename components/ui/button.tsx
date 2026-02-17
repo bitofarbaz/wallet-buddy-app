@@ -40,6 +40,7 @@ const buttonVariants = (theme: Theme) =>
       variant: {
         default: { backgroundColor: theme.primary },
         secondary: { backgroundColor: theme.secondary },
+        destructive: { backgroundColor: theme.destructive },
       },
     },
     compoundVariants: [
@@ -93,7 +94,7 @@ export const ButtonText: FC<TextProps> = (props) => {
       weight="semiBold"
       size="sm"
       color={
-        variant === "default"
+        variant === "default" || variant === "destructive"
           ? "primaryForeground"
           : variant === "secondary"
             ? "secondaryForeground"
